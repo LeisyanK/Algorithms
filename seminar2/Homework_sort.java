@@ -3,7 +3,9 @@ package seminar2;
 public class Homework_sort {
     public static void main(String[] args) {
         int[] array = new int[]{
-            4, 2, 5, 8, 1, 9, 2, 3, 6, 8, 5
+            4, 2, 52, 8, 17, 9, 22, 3, 6, 8, 
+            5, 28, 1, 84, 11, 4, 6, 35, 81, 15,
+            41, 65, 20, 8, 3, 26, 52, 6, 72, 45
         };
 
         piramidSort(array);
