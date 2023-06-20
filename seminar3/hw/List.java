@@ -1,32 +1,66 @@
 package seminar3.hw;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class List {
     //Node node = new Node();
     private Node head;
 
-    // разворот односвязного списка
-    public void reverse(List list){
-        Node node = head;
-        System.out.println(node.value);
-        Node nextNode = node.next;
-        Node nextNode2 = nextNode.next;
-        head.next = null;
-        // while (node.next.next != null) {
-        while (nextNode2 != null) {
-            // node.next = node;
-            // node.next.next = node.next;
-            // node = node.next;
-            // System.out.print(node.value + " ");
-            nextNode.next = node;
-
-            node = nextNode;
-            nextNode = nextNode2;
-            nextNode2 = nextNode.next;
+    // разворот односвязного списка в цикле
+    public void reverse(){
+        Node current = head;
+        // System.out.println(curNode.value);
+        Node previous = null;
+        while (current != null) {
+            Node tmp = current.next;
+            current.next = previous;
+            previous = current;
+            current = tmp;
         }
-        // head.next = null;
-        head = nextNode;
-        // head.next = null;
-        // node = head;
+        head = previous;
+    }
+
+    // разворот односвязного списка рекурсивно
+    // public void reverseRecursive(List list, Node node){
+    public void reverseRecursive(){
+        // reverseRecursive(head, head.next);
+        if (head != null) {
+            reverseRecursive(head.next, head);
+        }
+    }
+    private void reverseRecursive(Node current, Node previuos){
+        if (current.next != null){
+            reverseRecursive(current.next, current);
+        }
+         else {
+            head = current;
+        }
+        current.next = previuos;
+        previuos.next = null;
+    }
+
+    public void reverseUsingStack(){
+        Deque<Node> stack = new ArrayDeque<>();
+        Node current = head;
+        // System.out.println("head: " + head.value);
+        while (current != null) {
+            stack.push(current);
+            current = current.next;
+        }
+        
+        Node result = stack.peek();
+        // System.out.print(result.value + " ");
+
+        current = result;
+        while (!stack.isEmpty()) {
+            current.next = stack.pop();
+            // System.out.print(current.next.value + " ");
+            current = current.next;
+            current.next = null;
+        }
+        head = result;
+        // return result;
     }
 
     public void addFirst(int value){      
@@ -39,7 +73,7 @@ public class List {
     }
 
     // функция вывода списка
-    public void print(List list){
+    public void print(){
         if (head != null) {
             Node node = head;
             while (node != null){
